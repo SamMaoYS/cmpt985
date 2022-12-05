@@ -1,0 +1,1 @@
+python reconstruct.py -c scene_00000_00/rgb -d scene_00000_00/depth -p scene_00000_00/pose -i scene_00000_00/intrinsic/intrinsic_depth.txt -o mts_mesh.ply
