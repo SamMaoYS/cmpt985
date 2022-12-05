@@ -63,11 +63,6 @@ class Reconstruct:
             volume_unit_resolution=8
         )
 
-        with open('scene_00000_00/scene_00000_00.align.json') as f:
-            import json
-            align_data = json.load(f)
-            align_transform = np.asarray(align_data['coordinate_transform']).reshape((4,4), order='F')
-
         for i, pose_file in enumerate(tqdm(self.pose_files)):
             color = o3d.io.read_image(self.rgb_files[i])
             depth = o3d.io.read_image(self.depth_files[i])

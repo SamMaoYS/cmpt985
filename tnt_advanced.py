@@ -73,14 +73,12 @@ if __name__ == '__main__':
 
             if idx == 0:
                 extrinsics = np.eye(4)
-                rgb_data = np.asarray(Image.open(rgb_file))
-                color_height, color_width = rgb_data.shape[0], rgb_data.shape[1]
-                depth_height, depth_width = depth_data.shape[0], depth_data.shape[1]
 
-                scale_w = float(depth_width) / color_width
-                scale_h = float(depth_height) / color_height
-                scale = np.array([scale_w, scale_h, 1.0, 1.0])
-                K_depth = np.matmul(np.diag(scale), intrinsics)
+                K_depth = intrinsics.copy()
+                scale = 384 / 540
+                offset = (960 - 540) * 0.5
+                K_depth[0, 2] -= offset
+                K_depth[:2, :] *= scale
 
                 write_matrix(os.path.join(scene_output_dir, 'intrinsic', f'intrinsic_color.txt'), intrinsics)
                 write_matrix(os.path.join(scene_output_dir, 'intrinsic', f'intrinsic_depth.txt'), K_depth)
