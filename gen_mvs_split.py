@@ -34,7 +34,7 @@ def gen_split(input_dir, output_dir, split='train'):
         rgb_files = sorted_alphanum(glob.glob(f'{color_dir}/*.png'))
 
         num_rgb = len(rgb_files)
-        for i in range(0, num_rgb, 3):
+        for i in range(0, num_rgb, 12):
             rgb_file = rgb_files[i]
             frame_dict = {}
             rgb_filename = os.path.basename(rgb_file)
