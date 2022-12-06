@@ -1,9 +1,8 @@
 import os
 import numpy as np
 
-import hydra
-from omegaconf import DictConfig
-from PIL import Image
+import argparse
+import json
 from tqdm import tqdm
 import open3d as o3d
 from sklearn.neighbors import KDTree
@@ -55,6 +54,7 @@ def evaluate(gt_mesh, pred_mesh):
         'Recal': recal,
         'F-score': fscore,
     }
+    metrics['all'] = [metrics['Chamfer'], metrics['Prec'], metrics['Recal'], metrics['F-score']]
     return metrics
 
 if __name__ == '__main__':
@@ -63,4 +63,8 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--pred', type=str, action='store', required=False, help='Input pred mesh')
     args = parser.parse_args()
 
-    evaluate(args.gt, args.pred)
+    metrics = evaluate(args.gt, args.pred)
+    scan_id = os.path.basename(args.gt).split('.')[0]
+    with open(f'{scan_id}_eval.json', 'w+') as f:
+        json.dump(metrics, f)
+
