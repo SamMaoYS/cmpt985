@@ -1,0 +1,9 @@
+[submodule "MVS2D"]
+	path = MVS2D
+	url = https://github.com/ys-forks/MVS2D
+[submodule "monosdf"]
+	path = monosdf
+	url = https://github.com/Sun-XH/monosdf
+[submodule "NeuralRecon"]
+	path = NeuralRecon
+	url = https://github.com/eamonn-zh/NeuralRecon
